@@ -7,6 +7,7 @@ components/
 
 .idea
 !examples/*.tfvars
+*.auto.tfvars
 
 # We don't want to commit the test run lock files
 .terraform.lock.hcl

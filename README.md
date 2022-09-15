@@ -107,3 +107,70 @@ If `make check` target is successful, developer is good to commit the code to pr
 - runs `conftests`. `conftests` make sure `policy` checks are successful.
 - runs `terratest`. This is integration test suit.
 - runs `opa` tests
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.7 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0.2 |
+
+## Providers
+
+No providers.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_resource_name"></a> [resource\_name](#module\_resource\_name) | github.com/nexient-llc/tf-module-resource_name.git | 0.1.0 |
+| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | github.com/nexient-llc/tf-azurerm-module-resource_group.git | 0.1.0 |
+| <a name="module_storage_account"></a> [storage\_account](#module\_storage\_account) | github.com/nexient-llc/tf-azurerm-module-storage_account.git | 0.2.0 |
+| <a name="module_mssql_server"></a> [mssql\_server](#module\_mssql\_server) | git@github.com:nexient-llc/tf-azurerm-module-mssql_server.git | 0.1.0 |
+
+## Resources
+
+No resources.
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_logical_product_name"></a> [logical\_product\_name](#input\_logical\_product\_name) | (Required) Name of the application for which the resource is created. | `string` | n/a | yes |
+| <a name="input_class_env"></a> [class\_env](#input\_class\_env) | (Required) Environment where resource is going to be deployed. For ex. dev, qa, uat | `string` | n/a | yes |
+| <a name="input_instance_env"></a> [instance\_env](#input\_instance\_env) | Number that represents the instance of the environment. | `number` | `0` | no |
+| <a name="input_instance_resource"></a> [instance\_resource](#input\_instance\_resource) | Number that represents the instance of the resource. | `number` | `0` | no |
+| <a name="input_use_azure_region_abbr"></a> [use\_azure\_region\_abbr](#input\_use\_azure\_region\_abbr) | Whether to use region abbreviation e.g. eastus -> eus | `bool` | `false` | no |
+| <a name="input_resource_types"></a> [resource\_types](#input\_resource\_types) | Map of cloud resource types to be used in this module | <pre>map(object({<br>    type           = string<br>    maximum_length = number<br>  }))</pre> | <pre>{<br>  "mssql_server": {<br>    "maximum_length": 60,<br>    "type": "dbser"<br>  },<br>  "resource_group": {<br>    "maximum_length": 63,<br>    "type": "rg"<br>  },<br>  "storage_account": {<br>    "maximum_length": 24,<br>    "type": "sa"<br>  }<br>}</pre> | no |
+| <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | resource group primitive options | <pre>object({<br>    location = string<br>  })</pre> | n/a | yes |
+| <a name="input_account_tier"></a> [account\_tier](#input\_account\_tier) | The account\_tier of the Storage account | `string` | `"Standard"` | no |
+| <a name="input_account_replication_type"></a> [account\_replication\_type](#input\_account\_replication\_type) | The Replication type of the storage account | `string` | `"LRS"` | no |
+| <a name="input_access_tier"></a> [access\_tier](#input\_access\_tier) | Choose between Hot or Cool | `string` | `"Hot"` | no |
+| <a name="input_account_kind"></a> [account\_kind](#input\_account\_kind) | Defines the kind of account | `string` | `"StorageV2"` | no |
+| <a name="input_sql_server_version"></a> [sql\_server\_version](#input\_sql\_server\_version) | Version of the Microsoft SQL server | `string` | `"12.0"` | no |
+| <a name="input_administrator_login_username"></a> [administrator\_login\_username](#input\_administrator\_login\_username) | The admin username for the server | `string` | n/a | yes |
+| <a name="input_administrator_login_password"></a> [administrator\_login\_password](#input\_administrator\_login\_password) | The admin password for the server | `string` | n/a | yes |
+| <a name="input_connection_policy"></a> [connection\_policy](#input\_connection\_policy) | The connection policy for the server. Possible values are Default, Proxy or Redirect | `string` | `"Default"` | no |
+| <a name="input_enable_system_managed_identity"></a> [enable\_system\_managed\_identity](#input\_enable\_system\_managed\_identity) | Should the system managed identity be enabled for SQL Server? | `bool` | `true` | no |
+| <a name="input_minimum_tls_version"></a> [minimum\_tls\_version](#input\_minimum\_tls\_version) | Minimum TLS version for the server. Default is 1.2. Possible values are 1.0, 1.1, 1.2 or Disabled | `string` | `"1.2"` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Whether public network access is enabled for this server? Defaults to true | `bool` | `true` | no |
+| <a name="input_outbound_network_restriction_enabled"></a> [outbound\_network\_restriction\_enabled](#input\_outbound\_network\_restriction\_enabled) | Whether outbound network traffic is restricted for this server. Defaults to false | `bool` | `false` | no |
+| <a name="input_extended_auditing_enabled"></a> [extended\_auditing\_enabled](#input\_extended\_auditing\_enabled) | Whether the extended auditing should be enabled? | `bool` | `true` | no |
+| <a name="input_retention_in_days"></a> [retention\_in\_days](#input\_retention\_in\_days) | Number of days to retain the logs in the storage account. Required if extended\_auditing\_enabled=true | `number` | `30` | no |
+| <a name="input_allow_access_to_azure_services"></a> [allow\_access\_to\_azure\_services](#input\_allow\_access\_to\_azure\_services) | If true, it enables all the azure services to access the database server. | `bool` | `true` | no |
+| <a name="input_allow_firewall_ip_list"></a> [allow\_firewall\_ip\_list](#input\_allow\_firewall\_ip\_list) | A list of IP Address to whitelist, in order to access the database server | `list(string)` | `[]` | no |
+| <a name="input_allow_firewall_ip_ranges_list"></a> [allow\_firewall\_ip\_ranges\_list](#input\_allow\_firewall\_ip\_ranges\_list) | A list of IP Address ranges to whitelist, in order to access the database server | <pre>list(object({<br>    start_ip_address = string<br>    end_ip_address   = string<br>  }))</pre> | `[]` | no |
+| <a name="input_custom_tags"></a> [custom\_tags](#input\_custom\_tags) | A map of custom tags to be attached to this SQL Server instance | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_sql_server_id"></a> [sql\_server\_id](#output\_sql\_server\_id) | ID of the MS Sql Server |
+| <a name="output_sql_server_fqdn"></a> [sql\_server\_fqdn](#output\_sql\_server\_fqdn) | FQDN of the MS Sql Server |
+| <a name="output_name"></a> [name](#output\_name) | Name of the MS Sql Server |
+| <a name="output_admin_login_username"></a> [admin\_login\_username](#output\_admin\_login\_username) | Admin Login Username of the MS Sql Server |
+| <a name="output_admin_login_password"></a> [admin\_login\_password](#output\_admin\_login\_password) | Admin Login Password of the MS Sql Server |
+| <a name="output_restorable_dropped_database_ids"></a> [restorable\_dropped\_database\_ids](#output\_restorable\_dropped\_database\_ids) | A list of dropped restorable database IDs on this server |
+| <a name="output_identity_pricipal_id"></a> [identity\_pricipal\_id](#output\_identity\_pricipal\_id) | System Assigned Identity Principal ID |
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
