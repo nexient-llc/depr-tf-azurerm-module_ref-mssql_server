@@ -22,7 +22,7 @@ output "sql_server_fqdn" {
   value       = module.mssql_server.sql_server_fqdn
 }
 
-output "name" {
+output "sql_server_name" {
   description = "Name of the MS Sql Server"
   value       = module.mssql_server.name
 }
@@ -48,4 +48,14 @@ output "identity_pricipal_id" {
   description = "System Assigned Identity Principal ID"
   value       = try(module.mssql_server.identity_pricipal_id, "")
 
+}
+
+output "resource_group_name" {
+  description = "Name of the resource group in which the MS SQL Server is provisioned"
+  value       = module.resource_group.resource_group.name
+}
+
+output "storage_account_name" {
+  description = "Name of the storage account for audit logs of the SQL Server"
+  value       = nonsensitive(module.storage_account.storage_account.name)
 }
