@@ -129,7 +129,7 @@ No providers.
 | <a name="module_resource_name"></a> [resource\_name](#module\_resource\_name) | github.com/nexient-llc/tf-module-resource_name.git | 0.1.0 |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | github.com/nexient-llc/tf-azurerm-module-resource_group.git | 0.1.0 |
 | <a name="module_storage_account"></a> [storage\_account](#module\_storage\_account) | github.com/nexient-llc/tf-azurerm-module-storage_account.git | 0.2.0 |
-| <a name="module_mssql_server"></a> [mssql\_server](#module\_mssql\_server) | git@github.com:nexient-llc/tf-azurerm-module-mssql_server.git | 0.1.0 |
+| <a name="module_mssql_server"></a> [mssql\_server](#module\_mssql\_server) | github.com/nexient-llc/tf-azurerm-module-mssql_server.git | 0.1.1 |
 
 ## Resources
 

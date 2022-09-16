@@ -55,7 +55,7 @@ module "storage_account" {
 }
 
 module "mssql_server" {
-  source = "git@github.com:nexient-llc/tf-azurerm-module-mssql_server.git?ref=0.1.0"
+  source = "github.com/nexient-llc/tf-azurerm-module-mssql_server.git?ref=0.1.1"
 
   sql_server_name                      = local.sql_server_name
   resource_group                       = local.resource_group
