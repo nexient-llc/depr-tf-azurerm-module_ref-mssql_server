@@ -17,6 +17,6 @@ terraform {
 
   required_providers {
     azurerm = ">= 3.0.2"
+    random  = ">= 3.4.3"
   }
 }
-
