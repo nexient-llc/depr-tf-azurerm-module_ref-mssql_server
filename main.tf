@@ -19,6 +19,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+resource "random_password" "password" {
+  length           = var.password_length
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
 module "resource_name" {
   source = "github.com/nexient-llc/tf-module-resource_name.git?ref=0.2.0"
 
@@ -61,7 +67,7 @@ module "mssql_server" {
   resource_group                       = local.resource_group
   sql_server_version                   = var.sql_server_version
   administrator_login_username         = var.administrator_login_username
-  administrator_login_password         = var.administrator_login_password
+  administrator_login_password         = length(var.administrator_login_password) > 0 ? var.administrator_login_password : random_password.password.result
   connection_policy                    = var.connection_policy
   enable_system_managed_identity       = var.enable_system_managed_identity
   minimum_tls_version                  = var.minimum_tls_version

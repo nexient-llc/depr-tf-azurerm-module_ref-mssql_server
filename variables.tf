@@ -163,9 +163,16 @@ variable "administrator_login_username" {
 }
 
 variable "administrator_login_password" {
-  description = "The admin password for the server"
+  description = "The admin password for the server. If no value is provided by user, then a random password would be generated"
   type        = string
   sensitive   = true
+  default     = ""
+}
+
+variable "password_length" {
+  description = "The length of the random generated password."
+  type        = number
+  default     = 16
 }
 
 variable "connection_policy" {
